@@ -5,10 +5,10 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # 3. 의존성 파일 복사
-COPY backend/requirements.txt .
+COPY requirements.txt .
 
 # 4. 필요한 파이썬 패키지 설치
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 # 5. 전체 소스 코드 복사 (backend + frontend)
 COPY . .

@@ -3,7 +3,7 @@ from PIL import Image
 import random
 import os
 import requests
-
+from config import get_api_base
 from sidebar import render_sidebar
 
 # Streamlit 설정
@@ -94,8 +94,11 @@ TAROT_CARDS = {
     "King of Wands": "king_of_wands.png"
 }
 
-# 이미지 경로 기본 경로
-ASSET_PATH = os.path.join("assets", "tarot")
+API_BASE = get_api_base()
+
+# 절대 경로로 이미지 폴더 지정
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+ASSET_PATH = os.path.join(BASE_DIR, "..", "assets", "tarot")
 
 # 질문 입력
 question = st.text_input("💬 당신의 연애 고민은 무엇인가요?")
@@ -142,7 +145,7 @@ if st.session_state.selected_cards:
 if len(st.session_state.selected_cards) == 3 and question.strip():
     if st.button("🔍 해석 요청하기"):
         with st.spinner("GPT가 해석 중..."):
-            res = requests.post("http://localhost:8000/tarot", json={
+            res = requests.post(f"{API_BASE}/tarot", json={
                 "user_question": question,
                 "selected_cards": st.session_state.selected_cards
             })

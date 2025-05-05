@@ -1,7 +1,9 @@
 import streamlit as st
 import requests
-
+from config import get_api_base
 from sidebar import render_sidebar
+
+API_BASE = get_api_base()
 
 st.set_page_config(page_title="Cupid 챗봇", page_icon="💬")
 st.title("💬 Cupid 연애 챗봇")
@@ -65,7 +67,7 @@ else:
         user_msgs.append(user_input)
 
         # 요청 보내기
-        response = requests.post("http://localhost:8000/chatbot", json={
+        response = requests.post(f"{API_BASE}/chatbot", json={
             "myInfo": my_info,
             "userMessages": user_msgs,
             "assistantMessages": assistant_msgs

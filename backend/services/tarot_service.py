@@ -1,4 +1,4 @@
-from backend.utils import load_openai_client
+from utils import load_openai_client
 
 # OpenAI 클라이언트 생성
 client = load_openai_client()

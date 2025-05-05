@@ -2,9 +2,12 @@ import streamlit as st
 import requests
 from sidebar import render_sidebar
 import matplotlib.pyplot as plt
+from config import get_api_base
 
-st.set_page_config(page_title="연애 토론장", page_icon="⚖️")
-st.title("⚖️ 연애 토론장")
+API_BASE = get_api_base()
+
+st.set_page_config(page_title="연애 재판관", page_icon="⚖️")
+st.title("⚖️ 연애 재판관")
 
 render_sidebar()
 
@@ -41,7 +44,7 @@ if st.button("🧠 GPT에게 판단 요청"):
     if not situation.strip():
         st.warning("⚠️ 먼저 상황을 입력해주세요.")
     else:
-        res = requests.post("http://localhost:8000/love_judge", json={"situation": situation})
+        res = requests.post(f"{API_BASE}/love_judge", json={"situation": situation})
         if res.status_code == 200:
             data = res.json()
             if "male" in data and "female" in data:
