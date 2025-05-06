@@ -33,7 +33,7 @@ if not st.session_state.chat_started:
             st.warning("고민을 입력해주세요.")
         else:
             # 첫 요청 → 초기 질문
-            response = requests.post("http://localhost:8000/chatbot", json={
+            response = requests.post(f"{API_BASE}/chatbot", json={
                 "myInfo": my_info,
                 "userMessages": [first_question],
                 "assistantMessages": []

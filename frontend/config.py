@@ -3,7 +3,7 @@
 import os
 
 def get_api_base():
-    """Render 환경이면 실제 URL 반환, 아니면 localhost 사용"""
+    """Render 배포 환경에서는 외부 PORT가 1개만 허용되므로 localhost 사용"""
     if os.getenv("RENDER") == "1":
-        return "https://cupid-project.onrender.com"  # ⚠️ 실제 주소로 바꾸세요
+        return "http://localhost:8000"
     return "http://localhost:8000"
