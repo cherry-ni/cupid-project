@@ -55,7 +55,7 @@ async def tarot_reading(request: TarotRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/love_judge")
-def debate(request: DebateRequest):
+async def debate(request: DebateRequest):
     try:
         return get_judgement_result(request.situation)
     except Exception as e:
