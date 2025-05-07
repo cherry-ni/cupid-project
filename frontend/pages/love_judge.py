@@ -3,6 +3,7 @@ import requests
 from sidebar import render_sidebar
 import matplotlib.pyplot as plt
 from config import get_api_base
+from config import set_korean_font
 
 API_BASE = get_api_base()
 
@@ -15,8 +16,8 @@ render_sidebar()
 st.subheader("📌 연애 문제 상황을 설명해주세요")
 situation = st.text_area("예시: 남자친구가 약속을 잊고 연락도 없이 안 나왔어요.", height=150)
 
-# 한글 폰트 설정 (윈도우/맥 선택)
-plt.rcParams['font.family'] = 'AppleGothic'  # macOS 사용 시
+# 한글 폰트 설정
+set_korean_font()
 
 def draw_judgement_bar(male_percent, female_percent):
     fig, ax = plt.subplots(figsize=(6, 1))

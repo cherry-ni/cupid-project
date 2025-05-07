@@ -48,7 +48,10 @@ source .venv/bin/activate
 # 2. 의존성 설치
 pip install -r requirements.txt
 
-# 3. 서버 실행
+# 3. API 연결
+.env 파일에 API_KEY=your_API_KEY 추가
+
+# 4. 서버 실행
 bash start.sh
 ```
 
