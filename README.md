@@ -16,14 +16,12 @@ GPT API와 Streamlit, FastAPI, Docker, Render를 활용한 **AI 기반 연애 �
 ### 2. 🔮 연애 타로 리딩
 
 - 질문을 입력하고 3장의 타로 카드를 선택하면 GPT가 **타로 리딩 결과 해석**
-- 사용자가 선택한 타로 카드 이미지와 함께 직관적 리딩 제공
-- 약 80장의 타로 카드 이미지 포함 (`assets/tarot`)
+- 78장의 타로 카드 중 9장이 랜덤으로 제공
 
 ### 3. ⚖️ 연애 재판관 (Love Judge)
 
 - 연애 상황을 입력하면 GPT가 남자/여자 **누가 더 잘못했는지 퍼센트로 판단**
 - 판단 근거와 함께 시각적인 막대그래프로 결과 출력
-- GPT 응답을 JSON으로 파싱하여 신뢰도 높은 결과 제공
 
 ---
 
@@ -34,8 +32,6 @@ GPT API와 Streamlit, FastAPI, Docker, Render를 활용한 **AI 기반 연애 �
 | 프론트엔드 | Streamlit |
 | 백엔드 | FastAPI |
 | AI 모델 | OpenAI GPT-4o API |
-| 이미지 처리 | Pillow |
-| 시각화 | Matplotlib |
 | 환경 구성 | Python 3.9, Docker, Bash |
 | 배포 | Render (Docker 기반 배포) |
 
@@ -56,5 +52,5 @@ pip install -r requirements.txt
 bash start.sh
 ```
 
-### ✅ 웹페이지 접속 
+### ✅ 배포 
 [cupid-project link](cupid-project.onrender.com)

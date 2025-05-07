@@ -30,8 +30,8 @@ def draw_judgement_bar(male_percent, female_percent):
     ax.text(male_percent + female_percent / 2, 0, f"{female_percent}%", va='center', ha='center', color='white', fontweight='bold')
 
     # 왼쪽 오른쪽에 '남자' / '여자' 라벨 붙이기
-    ax.text(-5, 0, '남자', va='center', ha='right', fontsize=12, fontweight='bold', color='#FF6B6B')
-    ax.text(105, 0, '여자', va='center', ha='left', fontsize=12, fontweight='bold', color='#4D6AFF')
+    ax.text(-5, 0, '👨', va='center', ha='right', fontsize=12, fontweight='bold', color='#FF6B6B')
+    ax.text(105, 0, '👩', va='center', ha='left', fontsize=12, fontweight='bold', color='#4D6AFF')
 
     ax.set_xlim(0, 100)
     ax.axis('off')
