@@ -5,6 +5,7 @@ import os
 import requests
 from config import get_api_base
 from sidebar import render_sidebar
+from pathlib import Path
 
 # Streamlit 설정
 st.set_page_config(page_title="타로 카드 리딩", page_icon="🔮")
@@ -100,6 +101,25 @@ API_BASE = get_api_base()
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ASSET_PATH = os.path.join(BASE_DIR, "..", "assets", "tarot")
 
+# 캐싱된 이미지 로더 함수 정의
+@st.cache_resource
+def load_image(file_name):
+    """
+    이미지 파일을 열고 캐시합니다.
+    가능한 경우 .webp 포맷을 사용하고, 없으면 .png 사용
+    """
+    # webp 우선 시도
+    base_name = Path(file_name).stem  # e.g., "the_fool"
+    webp_path = os.path.join(ASSET_PATH, base_name + ".webp")
+    png_path = os.path.join(ASSET_PATH, base_name + ".png")
+
+    if os.path.exists(webp_path):
+        return Image.open(webp_path)
+    elif os.path.exists(png_path):
+        return Image.open(png_path)
+    else:
+        raise FileNotFoundError(f"Image not found: {file_name}")
+
 # 질문 입력
 question = st.text_input("💬 당신의 연애 고민은 무엇인가요?")
 can_select_cards = question.strip() != ""
@@ -117,9 +137,11 @@ st.subheader("9장의 카드 중 3장을 선택하세요")
 cols = st.columns(3)
 for i, (card_name, file_name) in enumerate(st.session_state.random_cards):
     with cols[i % 3]:
-        img_path = os.path.join(ASSET_PATH, file_name)
-        img = Image.open(img_path)
-        st.image(img, caption=card_name, use_container_width=True)
+        try:
+            img = load_image(file_name)  # 캐싱된 이미지 로딩
+            st.image(img, caption=card_name, use_container_width=True)
+        except FileNotFoundError:
+            st.warning(f"이미지 '{file_name}'을 찾을 수 없습니다.")
 
         if not question.strip():
             continue  # ❗ 질문 없으면 버튼은 아예 렌더링하지 않음

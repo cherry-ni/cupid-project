@@ -22,23 +22,22 @@ set_korean_font()
 def draw_judgement_bar(male_percent, female_percent):
     fig, ax = plt.subplots(figsize=(6, 1))
 
-    # 막대 구성
-    ax.barh([''], [male_percent], color='#FF6B6B', label='남자')
-    ax.barh([''], [female_percent], left=[male_percent], color='#4D6AFF', label='여자')
+    # 그래프 색상: Male(파랑), Female(빨강)
+    ax.barh([''], [male_percent], color='#4D6AFF', label='Male')  # 파랑
+    ax.barh([''], [female_percent], left=[male_percent], color='#FF6B6B', label='Female')  # 빨강
 
     # 퍼센트 텍스트
     ax.text(male_percent / 2, 0, f"{male_percent}%", va='center', ha='center', color='white', fontweight='bold')
     ax.text(male_percent + female_percent / 2, 0, f"{female_percent}%", va='center', ha='center', color='white', fontweight='bold')
 
-    # 왼쪽 오른쪽에 '남자' / '여자' 라벨 붙이기
-    ax.text(-5, 0, '남자', va='center', ha='right', fontsize=12, fontweight='bold', color='#FF6B6B')
-    ax.text(105, 0, '여자', va='center', ha='left', fontsize=12, fontweight='bold', color='#4D6AFF')
+    # 양쪽 텍스트 라벨 (한글 → 영어, 색상은 그래프와 맞춤)
+    ax.text(-5, 0, 'Male', va='center', ha='right', fontsize=8, fontweight='bold', color='#4D6AFF')     # 파랑
+    ax.text(105, 0, 'Female', va='center', ha='left', fontsize=8, fontweight='bold', color='#FF6B6B')   # 빨강
 
     ax.set_xlim(0, 100)
     ax.axis('off')
 
     st.pyplot(fig)
-
 
 # 버튼 눌렀을 때 GPT API 호출
 if st.button("🧠 GPT에게 판단 요청"):
